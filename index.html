@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HNG i14 Marketing Mavericks — Hall of Fame</title>
+    <!-- Fonts Integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variables */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --font-header: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            
+            --bg-deep: #060607;
+            --bg-surface: #111113;
+            --bg-glass: rgba(15, 15, 17, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-stark: #FFFFFF;
+            --text-muted: #8E8E93;
+            --text-dim: #444446;
+            --spotlight-glow: rgba(255, 255, 255, 0.03);
+            --radius-main: 20px;
+            --radius-inner: 12px;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-cinematic: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-deep);
+            color: var(--text-stark);
+            line-height: 1.4;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient Starfield Layering Effect */
+        .space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .stars-layer-1, .stars-layer-2 {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                radial-gradient(1px 1px at 25px 40px, rgba(255,255,255,0.4) 100%, transparent),
+                radial-gradient(1.5px 1.5px at 75px 120px, rgba(255,255,255,0.3) 100%, transparent),
+                radial-gradient(1px 1px at 150px 220px, rgba(255,255,255,0.2) 100%, transparent),
+                radial-gradient(2px 2px at 230px 340px, rgba(255,255,255,0.15) 100%, transparent);
+            background-size: 400px 400px;
+            top: -50%;
+            left: -50%;
+        }
+
+        .stars-layer-1 {
+            animation: cosmicDrift 120s linear infinite;
+        }
+
+        .stars-layer-2 {
+            animation: cosmicDrift 180s linear infinite reverse;
+            opacity: 0.7;
+        }
+
+        @keyframes cosmicDrift {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Layout Structure Wrapper */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .site-header {
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .brand-title {
+            font-family: var(--font-header);
+            font-weight: 800;
+            font-size: 2.2rem;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #FFF 0%, #A3A3A3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        /* Restricted Height Carousel Showcase Theater */
+        .showcase-theater {
+            background: radial-gradient(circle at top left, var(--spotlight-glow), transparent 50%), var(--bg-glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-main);
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            overflow: hidden;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Cinematic Profile Switch Animation target */
+        .showcase-theater.is-changing {
+            opacity: 0;
+        }
+
+        .theater-layout {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 32px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .theater-avatar-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius-inner);
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+        }
+
+        .theater-avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        /* Carousel Navigation and Slider Container Mechanics */
+        .carousel-view-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            min-height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-window {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 400%;
+        }
+
+        .slide-pane {
+            width: 25%;
+            flex-shrink: 0;
+        }
+
+        .slide-pane h3 {
+            font-family: var(--font-header);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .kv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 10px 24px;
+        }
+
+        /* Upgraded Data Row to support Modal Triggers */
+        .kv-row {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            padding-bottom: 4px;
+            padding-top: 4px;
+            border-radius: 4px;
+            transition: var(--transition-cinematic);
+        }
+
+        .kv-row.has-truncation {
+            cursor: pointer;
+        }
+
+        .kv-row.has-truncation:hover {
+            background: rgba(255, 255, 255, 0.03);
+            padding-left: 6px;
+        }
+
+        .kv-key {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .kv-value {
+            font-size: 0.9rem;
+            color: var(--text-stark);
+            font-weight: 400;
+            margin-top: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kv-value a {
+            color: var(--text-stark);
+        }
+
+        /* Carousel Navigation Footer Strip Controls */
+        .carousel-footer-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .active-slide-indicator {
+            font-size: 0.8rem;
+            font-family: var(--font-header);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .arrow-action-cluster {
+            display: flex;
+            gap: 8px;
+        }
+
+        .arrow-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            color: var(--text-stark);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .arrow-btn:hover:not(:disabled) {
+            background: #FFFFFF;
+            color: var(--bg-deep);
+            transform: scale(1.05);
+        }
+
+        .arrow-btn:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+
+        /* Filtering Layout Bars */
+        .directory-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-family: var(--font-header);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .filter-cluster {
+            display: flex;
+            gap: 6px;
+        }
+
+        .filter-trigger {
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            font-family: var(--font-header);
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-trigger:hover {
+            color: var(--text-stark);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .filter-trigger.active {
+            color: var(--bg-deep);
+            background: var(--text-stark);
+            border-color: var(--text-stark);
+        }
+
+        /* Hall Inductee Grid Layout Tiles */
+        .hall-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Tab Switch Cinematic Transition States */
+        .hall-grid.is-changing {
+            opacity: 0;
+            transform: scale(0.98);
+        }
+
+        .inductee-tile {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-inner);
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .inductee-tile:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+        }
+
+        .inductee-tile.selected {
+            border-color: var(--text-stark);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .tile-photo-wrap {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            background: #161619;
+        }
+
+        .tile-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: var(--transition-smooth);
+        }
+
+        .inductee-tile:hover .tile-photo-wrap img,
+        .inductee-tile.selected .tile-photo-wrap img {
+            filter: grayscale(0%);
+        }
+
+        .tile-name {
+            font-family: var(--font-header);
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tile-alias {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ----------------------------------------------------------------
+           AMBIENT GLASS MODAL SYSTEM OVERLAY UI LAYERS
+        ------------------------------------------------------------------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: linear-gradient(135deg, #16161a 0%, #0d0d0f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-main);
+            padding: 32px;
+            max-width: 520px;
+            width: 90%;
+            position: relative;
+            transform: translateY(20px) scale(0.98);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+            transition: var(--transition-smooth);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close-trigger {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-close-trigger:hover {
+            background: #FFFFFF;
+            color: #000;
+            border-color: #FFFFFF;
+        }
+
+        .modal-text {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: var(--text-stark);
+            margin-top: 8px;
+        }
+
+        .site-footer {
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 32px;
+            margin-top: 48px;
+        }
+
+        .join-anchor {
+            font-family: var(--font-header);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            transition: var(--transition-smooth);
+        }
+
+        .join-anchor:hover {
+            color: var(--text-stark);
+        }
+
+        /* Mobile Responsive Layout Breaks */
+        @media (max-width: 800px) {
+            .theater-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .theater-avatar-box {
+                max-width: 120px;
+                margin: 0 auto;
+            }
+            .kv-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .directory-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .hall-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CSS Animated Starfield Backdrop Plane Layer -->
+    <div class="space-canvas" aria-hidden="true">
+        <div class="stars-layer-1"></div>
+        <div class="stars-layer-2"></div>
+    </div>
+
+    <div class="wrapper">
+        <header class="site-header">
+            <h1 class="brand-title">Mavericks</h1>
+            <p class="brand-subtitle">HNG i14 Marketing Track Finalists Hall of Fame</p>
+        </header>
+
+        <!-- Compressed Showcase Theater Area Panel Layout -->
+        <section class="showcase-theater" id="showcaseBox" aria-live="polite">
+            <!-- Dynamic JavaScript Content Injection Targets -->
+        </section>
+
+        <!-- Directory Category Filters Navigation -->
+        <div class="directory-controls">
+            <h2 class="section-label">Inductee Directory</h2>
+            <div class="filter-cluster" role="tablist">
+                <button class="filter-trigger active" id="btn-mavericks" onclick="switchDirectoryTab('mavericks')" role="tab" aria-selected="true">Mavericks</button>
+                <button class="filter-trigger" id="btn-catalysts" onclick="switchDirectoryTab('catalysts')" role="tab" aria-selected="false">Growth Catalysts</button>
+                <button class="filter-trigger" id="btn-stars" onclick="switchDirectoryTab('stars')" role="tab" aria-selected="false">Rising Stars</button>
+            </div>
+        </div>
+
+        <!-- Selection Tile Target Layout Grid Area -->
+        <section class="hall-grid" id="tileGridArea"></section>
+
+        <footer class="site-footer">
+            <a href="https://hng.tech/internship" class="join-anchor" target="_blank" rel="noopener noreferrer">Advance to the HNG Internship Program</a>
+        </footer>
+    </div>
+
+    <!-- GLOBAL GLASS MODAL BASE SYSTEM HTML INJECTION -->
+    <div class="modal-overlay" id="glassModalLayer" onclick="closeModalOnOuterTargetClick(event)">
+        <div class="modal-card">
+            <button class="modal-close-trigger" onclick="closeGlassModal()">✕</button>
+            <span class="kv-key" id="modalTargetKey" style="font-size: 0.8rem; letter-spacing: 0.05em;">Field Title</span>
+            <p class="modal-text" id="modalTargetValue">Full comprehensive text information dynamic target injection element slot.</p>
+        </div>
+    </div>
+
+    <!-- Interactive Logic State Script System Engine Controller -->
+    <script>
+        const registryData = { mavericks: [], catalysts: [], stars: [] };
+        let activeTabCategory = 'mavericks';
+        let focusedInducteeId = null;
+        let activeCarouselSlideIndex = 0;
+
+        const slideTitles = ["Profile", "HNG Experience", "HNG Relationships", "Moving on..."];
+
+        // Registry Generator System
+        function constructEcosystemRegistryFillers() {
+            // Fill 20 Mavericks
+            for (let i = 1; i <= 20; i++) {
+                registryData.mavericks.push({
+                    id: `mav-${i}`,
+                    name: i === 1 ? 'Chidubem Ojukwu' : `Maverick Marketer ${i}`,
+                    alias: i === 1 ? 'Man of the House' : `GrowthAgent_${i}`,
+                    linkedin: 'https://www.linkedin.com',
+                    portfolio: 'https://github.com/COTworks',
+                    rating: '⭐⭐⭐⭐⭐',
+                    experience: 'Testing out my marketing parameters in this intensive ecosystem was highly transformative and forced extreme mental focus adjustments.',
+                    differently: 'Prioritize automated macro-funnel systems early inside live data acquisition tracking phases immediately.',
+                    bestTask: 'Stage 2: German Tech Companies Research + Conflict Resolution workflows.',
+                    worstTask: 'Stage 3: Multi-Leg Travel Plan tracking spreadsheet configurations and layout parameters.',
+                    clients: 'All target sandbox enterprise owners were awesome individuals who pushed metrics tracking to extreme levels!',
+                    mentorsShout: 'Adaeze, Ahurika, BigTiffs, Pearl, The High Baba, Udi; thank you all so much for the exceptional guidance throughout this intense journey!',
+                    grateful: 'Adaeze, Airstar, BukolaO, FegoU, HephzibahM, JulietM, ShygirlA & Udi. Every single one of you made the tight sprints manageable.',
+                    clientShout: 'Qubzes kept it 100 from the beginning of our campaign metrics tracking across channels.',
+                    next: 'Stepping into highly dedicated product marketing tracking structures directly across active target firms.',
+                    back: 'Hell yeah!',
+                    advice: 'Enjoy the absolute thrill of metric optimization, remember to breathe, and keep it 100.'
+                });
+            }
+            // Fill 10 Catalysts
+            for (let i = 1; i <= 10; i++) {
+                registryData.catalysts.push({
+                    id: `cat-${i}`,
+                    name: `Catalyst Mentor ${i}`,
+                    alias: `LeadStrategist_${i}`,
+                    linkedin: 'https://www.linkedin.com',
+                    portfolio: 'https://hng.tech',
+                    rating: '⭐⭐⭐⭐⭐',
+                    experience: 'Guiding cohorts to locate retention vulnerabilities across multi-channel environments was challenging yet rewarding.',
+                    differently: 'Incorporate deep metric performance checks at earlier stage parameters to catch layout errors.',
+                    bestTask: 'Evaluating final deployment verification metrics and marketing profile maps.',
+                    worstTask: 'Parsing basic layout configurations that missed responsive scaling parameters entirely.',
+                    clients: 'Coordinating system performance matrices inside growing ecosystem platforms seamlessly.',
+                    mentorsShout: 'Outstanding structural focus shown by the entire track operation network across sprints.',
+                    grateful: 'The creative stamina and conversion metrics demonstrated by the finalists under pressure.',
+                    clientShout: 'Partners providing transparent sandbox environments for performance verification tests.',
+                    next: 'Formulating next-gen marketing data workflows for future tracks.',
+                    back: 'Without a doubt.',
+                    advice: 'Analyze live conversion drops instantly, use modern clean frames, and trust analytics.'
+                });
+            }
+            // Fill 15 Stars
+            for (let i = 1; i <= 15; i++) {
+                registryData.stars.push({
+                    id: `star-${i}`,
+                    name: `Rising Star ${i}`,
+                    alias: `ValiantMarketer_${i}`,
+                    linkedin: 'https://www.linkedin.com',
+                    portfolio: 'https://github.com',
+                    rating: '⭐⭐⭐⭐★',
+                    experience: 'A fast-paced journey reshaping my visual layout hierarchies and performance acquisition tracking schemas.',
+                    differently: 'Allocate buffer hours cleanly between asset creation workflows and deployment steps.',
+                    bestTask: 'Stage 4: Interactive micro-copy adjustments and early access generation frameworks.',
+                    worstTask: 'Stage 1: Processing unstructured raw client databases without mapping templates.',
+                    clients: 'Project track leads provided key instructions into real industry requirements.',
+                    mentorsShout: 'Appreciation to operational track leads for maintaining objective grading logic.',
+                    grateful: 'Unwavering backup from active tracking peers during high-stress sprint windows.',
+                    clientShout: 'Distribution channels that enabled real live tests directly across target audiences.',
+                    next: 'Developing conversion pipeline strategies while extending content layout skills.',
+                    back: 'Absolutely!',
+                    advice: 'Embrace clear analytical critique loops, keep layouts clean, and link up with peers.'
+                });
+            }
+        }
+
+        // Ambient Glass Modal Logic Controller Engines
+        function openGlassModal(key, value) {
+            document.getElementById('modalTargetKey').innerText = key;
+            document.getElementById('modalTargetValue').innerText = value;
+            document.getElementById('glassModalLayer').classList.add('active');
+        }
+
+        function closeGlassModal() {
+            document.getElementById('glassModalLayer').classList.remove('active');
+        }
+
+        function closeModalOnOuterTargetClick(event) {
+            if (event.target.id === 'glassModalLayer') {
+                closeGlassModal();
+            }
+        }
+
+        // Dynamic Text Truncation Checker to flag expandable rows safely
+        function evaluateRowTruncationSafety(rowElement, textStr) {
+            // Check if string length safe threshold is broken to deploy hover micro-interactions
+            if (textStr.length > 55) {
+                rowElement.classList.add('has-truncation');
+            }
+        }
+
+        // Carousel Slide Transition Action Controller
+        function shiftCarouselSlidePosition(direction) {
+            if (direction === 'next' && activeCarouselSlideIndex < 3) activeCarouselSlideIndex++;
+            if (direction === 'prev' && activeCarouselSlideIndex > 0) activeCarouselSlideIndex--;
+
+            document.getElementById('sliderTrack').style.transform = `translateX(-${activeCarouselSlideIndex * 25}%)`;
+            document.getElementById('slideTitleText').innerText = slideTitles[activeCarouselSlideIndex];
+            
+            document.getElementById('prevArrow').disabled = activeCarouselSlideIndex === 0;
+            document.getElementById('nextArrow').disabled = activeCarouselSlideIndex === 3;
+        }
+
+        // Individual Theater Injector Renderer Engine with Cinematic Cross-Fade
+        function refreshShowcaseTheaterProfileCard(itemId) {
+            const showcaseBox = document.getElementById('showcaseBox');
+            const targetPool = registryData[activeTabCategory];
+            const profile = targetPool.find(p => p.id === itemId);
+
+            if (!profile) return;
+
+            // Trigger Cinematic Profile Transition Out Fading state
+            showcaseBox.classList.add('is-changing');
+
+            setTimeout(() => {
+                showcaseBox.innerHTML = `
+                    <div class="theater-layout">
+                        <div class="theater-avatar-box">
+                            <img src="https://avatars.githubusercontent.com/u/placeholder?s=300" alt="${profile.name}'s image picture look">
+                        </div>
+                        <div class="carousel-view-panel">
+                            <div class="slider-window">
+                                <div class="slider-track" id="sliderTrack" style="transform: translateX(-${activeCarouselSlideIndex * 25}%);">
+                                    
+                                    <!-- Slide 1: Profile Block -->
+                                    <div class="slide-pane">
+                                        <h3>Profile</h3>
+                                        <div class="kv-grid">
+                                            <div class="kv-row" id="r-name"><span class="kv-key">Name</span><span class="kv-value">${profile.name}</span></div>
+                                            <div class="kv-row" id="r-alias"><span class="kv-key">Alias</span><span class="kv-value">${profile.alias}</span></div>
+                                            <div class="kv-row"><span class="kv-key">LinkedIn</span><span class="kv-value"><a href="${profile.linkedin}" target="_blank" rel="noopener">www.linkedin.com</a></span></div>
+                                            <div class="kv-row"><span class="kv-key">Portfolio</span><span class="kv-value"><a href="${profile.portfolio}" target="_blank" rel="noopener">View Portfolio</a></span></div>
+                                            <div class="kv-row"><span class="kv-key">HNG i14 Rating</span><span class="kv-value">${profile.rating}</span></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Slide 2: HNG Experience -->
+                                    <div class="slide-pane">
+                                        <h3>HNG Experience</h3>
+                                        <div class="kv-grid">
+                                            <div class="kv-row" id="r-exp" onclick="openGlassModal('My Experience', \`${profile.experience}\`)"><span class="kv-key">My Experience</span><span class="kv-value">${profile.experience}</span></div>
+                                            <div class="kv-row" id="r-diff" onclick="openGlassModal('What I\\'d do Differently', \`${profile.differently}\`)"><span class="kv-key">What I'd do Differently</span><span class="kv-value">${profile.differently}</span></div>
+                                            <div class="kv-row" id="r-btask" onclick="openGlassModal('Best Stage Task', \`${profile.bestTask}\`)"><span class="kv-key">Best Stage Task</span><span class="kv-value">${profile.bestTask}</span></div>
+                                            <div class="kv-row" id="r-wtask" onclick="openGlassModal('Worst Stage Task', \`${profile.worstTask}\`)"><span class="kv-key">Worst Stage Task</span><span class="kv-value">${profile.worstTask}</span></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Slide 3: HNG Relationships -->
+                                    <div class="slide-pane">
+                                        <h3>HNG Relationships</h3>
+                                        <div class="kv-grid">
+                                            <div class="kv-row" id="r-client" onclick="openGlassModal('HNG Clients', \`${profile.clients}\`)"><span class="kv-key">HNG Clients</span><span class="kv-value">${profile.clients}</span></div>
+                                            <div class="kv-row" id="r-mshout" onclick="openGlassModal('Mentors Shout-out', \`${profile.mentorsShout}\`)"><span class="kv-key">Mentors Shout-out</span><span class="kv-value">${profile.mentorsShout}</span></div>
+                                            <div class="kv-row" id="r-grate" onclick="openGlassModal('I\\'m Grateful For', \`${profile.grateful}\`)"><span class="kv-key">I'm Grateful For</span><span class="kv-value">${profile.grateful}</span></div>
+                                            <div class="kv-row" id="r-cshout" onclick="openGlassModal('Client Shout-out', \`${profile.clientShout}\`)"><span class="kv-key">Client Shout-out</span><span class="kv-value">${profile.clientShout}</span></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Slide 4: Moving On -->
+                                    <div class="slide-pane">
+                                        <h3>Moving on...</h3>
+                                        <div class="kv-grid">
+                                            <div class="kv-row" id="r-next" onclick="openGlassModal('After HNG, what next?', \`${profile.next}\`)"><span class="kv-key">After HNG, what next?</span><span class="kv-value">${profile.next}</span></div>
+                                            <div class="kv-row" id="r-back"><span class="kv-key">Will I Be Back?</span><span class="kv-value">${profile.back}</span></div>
+                                            <div class="kv-row" id="r-adv" onclick="openGlassModal('Dear Prospective HNG i15...', \`${profile.advice}\`)"><span class="kv-key">Dear Prospective HNG i15...</span><span class="kv-value">${profile.advice}</span></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Horizontal Swipe Strip Navigation Controllers -->
+                            <div class="carousel-footer-controls">
+                                <span class="active-slide-indicator" id="slideTitleText">${slideTitles[activeCarouselSlideIndex]}</span>
+                                <div class="arrow-action-cluster">
+                                    <button class="arrow-btn" id="prevArrow" onclick="shiftCarouselSlidePosition('prev')" aria-label="Previous info sector" ${activeCarouselSlideIndex === 0 ? 'disabled' : ''}>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                    </button>
+                                    <button class="arrow-btn" id="nextArrow" onclick="shiftCarouselSlidePosition('next')" aria-label="Next info sector" ${activeCarouselSlideIndex === 3 ? 'disabled' : ''}>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Run Truncation Evaluation mappings to safely hook up interactive classes
+                evaluateRowTruncationSafety(document.getElementById('r-exp'), profile.experience);
+                evaluateRowTruncationSafety(document.getElementById('r-diff'), profile.differently);
+                evaluateRowTruncationSafety(document.getElementById('r-btask'), profile.bestTask);
+                evaluateRowTruncationSafety(document.getElementById('r-wtask'), profile.worstTask);
+                evaluateRowTruncationSafety(document.getElementById('r-client'), profile.clients);
+                evaluateRowTruncationSafety(document.getElementById('r-mshout'), profile.mentorsShout);
+                evaluateRowTruncationSafety(document.getElementById('r-grate'), profile.grateful);
+                evaluateRowTruncationSafety(document.getElementById('r-cshout'), profile.clientShout);
+                evaluateRowTruncationSafety(document.getElementById('r-next'), profile.next);
+                evaluateRowTruncationSafety(document.getElementById('r-adv'), profile.advice);
+
+                // Lift changing block back up cleanly
+                showcaseBox.classList.remove('is-changing');
+            }, 150);
+        }
+
+        // Build Navigation Grid Thumbnails Engine
+        function populateDirectoryTiles() {
+            const tileGridArea = document.getElementById('tileGridArea');
+            tileGridArea.innerHTML = '';
+
+            const items = registryData[activeTabCategory];
+
+            items.forEach(inductee => {
+                const tile = document.createElement('div');
+                const isSelected = inductee.id === focusedInducteeId;
+                tile.className = `inductee-tile ${isSelected ? 'selected' : ''}`;
+                tile.setAttribute('tabindex', '0');
+                tile.setAttribute('role', 'button');
+
+                tile.innerHTML = `
+                    <div class="tile-photo-wrap">
+                        <img src="https://avatars.githubusercontent.com/u/placeholder?s=150" alt="${inductee.name} frame card look">
+                    </div>
+                    <div class="tile-name">${inductee.name}</div>
+                    <div class="tile-alias">${inductee.alias}</div>
+                `;
+
+                const executeSelection = () => {
+                    focusedInducteeId = inductee.id;
+                    document.querySelectorAll('.inductee-tile').forEach(t => t.classList.remove('selected'));
+                    tile.classList.add('selected');
+                    refreshShowcaseTheaterProfileCard(inductee.id);
+                };
+
+                tile.addEventListener('click', executeSelection);
+                tile.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        executeSelection();
+                    }
+                });
+
+                tileGridArea.appendChild(tile);
+            });
+        }
+
+        // Global Tab Switch Engine with Cinematic Cross-Fade + Slide Animations
+        function switchDirectoryTab(categoryKey) {
+            const gridArea = document.getElementById('tileGridArea');
+            activeTabCategory = categoryKey;
+            activeCarouselSlideIndex = 0; // Snap slide positioning state cleanly back to profile defaults
+
+            // Drop Opacity and Scale lower thumbnails layout
+            gridArea.classList.add('is-changing');
+
+            document.querySelectorAll('.filter-trigger').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            document.getElementById(`btn-${categoryKey}`).classList.add('active');
+            document.getElementById(`btn-${categoryKey}`).setAttribute('aria-selected', 'true');
+
+            const newPool = registryData[categoryKey];
+            if (newPool.length > 0) focusedInducteeId = newPool[0].id;
+
+            // Stagger actual content insertion slightly to give execution space for the CSS fade-out bounds
+            setTimeout(() => {
+                populateDirectoryTiles();
+                refreshShowcaseTheaterProfileCard(focusedInducteeId);
+                
+                // Lift layout cleanly back into place
+                gridArea.classList.remove('is-changing');
+            }, 250);
+        }
+
+        // Connect physical escape keystroke maps to open Modal layers
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeGlassModal();
+        });
+
+        // Boot-Up
+        constructEcosystemRegistryFillers();
+        if (registryData.mavericks.length > 0) focusedInducteeId = registryData.mavericks[0].id;
+        populateDirectoryTiles();
+        refreshShowcaseTheaterProfileCard(focusedInducteeId);
+    </script>
+</body>
+</html>
