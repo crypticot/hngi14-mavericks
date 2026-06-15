@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS Reset & Variables */
+        /* CSS Reset & System Design System Tokens */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -47,7 +47,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Ambient Starfield Layering Effect */
+        /* Ambient Cosmic Starfield Moving Backdrop Plane */
         .space-canvas {
             position: fixed;
             top: 0;
@@ -87,7 +87,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Layout Structure Wrapper */
+        /* Layout Structure Grid Parameters */
         .wrapper {
             position: relative;
             z-index: 1;
@@ -98,7 +98,10 @@
 
         .site-header {
             margin-bottom: 32px;
-            text-align: left;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .brand-title {
@@ -118,7 +121,7 @@
             margin-top: 2px;
         }
 
-        /* Restricted Height Carousel Showcase Theater */
+        /* Restricted Height Showcase Theater Card Panel */
         .showcase-theater {
             background: radial-gradient(circle at top left, var(--spotlight-glow), transparent 50%), var(--bg-glass);
             backdrop-filter: blur(24px);
@@ -135,7 +138,7 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Cinematic Profile Switch Animation target */
+        /* Cinematic Profile Switch Fade Class Trigger */
         .showcase-theater.is-changing {
             opacity: 0;
         }
@@ -156,6 +159,7 @@
             overflow: hidden;
             border: 1px solid var(--border-glass);
             box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+            background: #161619;
         }
 
         .theater-avatar-box img {
@@ -165,7 +169,7 @@
             transition: var(--transition-smooth);
         }
 
-        /* Carousel Navigation and Slider Container Mechanics */
+        /* Carousel Navigation and Inner Track Configuration Layer */
         .carousel-view-panel {
             display: flex;
             flex-direction: column;
@@ -209,7 +213,7 @@
             gap: 10px 24px;
         }
 
-        /* Upgraded Data Row to support Modal Triggers */
+        /* Row Layout Mapping supporting Ambient Modals */
         .kv-row {
             display: flex;
             flex-direction: column;
@@ -225,7 +229,7 @@
         }
 
         .kv-row.has-truncation:hover {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             padding-left: 6px;
         }
 
@@ -248,9 +252,15 @@
 
         .kv-value a {
             color: var(--text-stark);
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(255,255,255,0.3);
         }
 
-        /* Carousel Navigation Footer Strip Controls */
+        .kv-value a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* Carousel Horizontal Navigation Footer Strips */
         .carousel-footer-controls {
             display: flex;
             justify-content: space-between;
@@ -299,7 +309,7 @@
             cursor: not-allowed;
         }
 
-        /* Filtering Layout Bars */
+        /* Navigation Filter Controller Layouts */
         .directory-controls {
             display: flex;
             justify-content: space-between;
@@ -343,7 +353,7 @@
             border-color: var(--text-stark);
         }
 
-        /* Hall Inductee Grid Layout Tiles */
+        /* Thumbnail Grid Architecture */
         .hall-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -353,7 +363,7 @@
             opacity: 1;
         }
 
-        /* Tab Switch Cinematic Transition States */
+        /* Cinematic Tab Change Animation Class States */
         .hall-grid.is-changing {
             opacity: 0;
             transform: scale(0.98);
@@ -420,7 +430,7 @@
         }
 
         /* ----------------------------------------------------------------
-           AMBIENT GLASS MODAL SYSTEM OVERLAY UI LAYERS
+           AMBIENT GLASS MODAL OVERLAY ARCHITECTURE
         ------------------------------------------------------------------- */
         .modal-overlay {
             position: fixed;
@@ -486,6 +496,7 @@
             margin-top: 8px;
         }
 
+        /* Footer parameters */
         .site-footer {
             text-align: center;
             border-top: 1px solid var(--border-glass);
@@ -508,7 +519,7 @@
             color: var(--text-stark);
         }
 
-        /* Mobile Responsive Layout Breaks */
+        /* Mobile Responsive Viewports Break Layouts */
         @media (max-width: 800px) {
             .theater-layout {
                 grid-template-columns: 1fr;
@@ -538,7 +549,7 @@
 </head>
 <body>
 
-    <!-- CSS Animated Starfield Backdrop Plane Layer -->
+    <!-- Space Engine Background Plane Layer -->
     <div class="space-canvas" aria-hidden="true">
         <div class="stars-layer-1"></div>
         <div class="stars-layer-2"></div>
@@ -546,26 +557,26 @@
 
     <div class="wrapper">
         <header class="site-header">
-            <h1 class="brand-title">Mavericks</h1>
-            <p class="brand-subtitle">HNG i14 Marketing Track Finalists Hall of Fame</p>
+            <h1 class="brand-title">The Mavericks</h1>
+            <p class="brand-subtitle">HNG i14 Marketing Hall of Fame</p>
         </header>
 
-        <!-- Compressed Showcase Theater Area Panel Layout -->
+        <!-- Compressed Dynamic Showcase Theater Module -->
         <section class="showcase-theater" id="showcaseBox" aria-live="polite">
-            <!-- Dynamic JavaScript Content Injection Targets -->
+            <!-- Loaded dynamically on system boot-up -->
         </section>
 
-        <!-- Directory Category Filters Navigation -->
+        <!-- Directory Tab Switcher Filters Layout -->
         <div class="directory-controls">
             <h2 class="section-label">Inductee Directory</h2>
             <div class="filter-cluster" role="tablist">
-                <button class="filter-trigger active" id="btn-mavericks" onclick="switchDirectoryTab('mavericks')" role="tab" aria-selected="true">Mavericks</button>
-                <button class="filter-trigger" id="btn-catalysts" onclick="switchDirectoryTab('catalysts')" role="tab" aria-selected="false">Growth Catalysts</button>
-                <button class="filter-trigger" id="btn-stars" onclick="switchDirectoryTab('stars')" role="tab" aria-selected="false">Rising Stars</button>
+                <button class="filter-trigger active" id="btn-mavericks" onclick="switchDirectoryTab('mavericks')" role="tab" aria-selected="true">Converters</button>
+                <button class="filter-trigger" id="btn-catalysts" onclick="switchDirectoryTab('catalysts')" role="tab" aria-selected="false">Windbearers</button>
+                <button class="filter-trigger" id="btn-stars" onclick="switchDirectoryTab('stars')" role="tab" aria-selected="false">Wanderers</button>
             </div>
         </div>
 
-        <!-- Selection Tile Target Layout Grid Area -->
+        <!-- Target Grid Area Placement Cards -->
         <section class="hall-grid" id="tileGridArea"></section>
 
         <footer class="site-footer">
@@ -573,95 +584,29 @@
         </footer>
     </div>
 
-    <!-- GLOBAL GLASS MODAL BASE SYSTEM HTML INJECTION -->
+    <!-- GLOBAL GLASS MODAL ELEMENT BASE STRUCT -->
     <div class="modal-overlay" id="glassModalLayer" onclick="closeModalOnOuterTargetClick(event)">
         <div class="modal-card">
             <button class="modal-close-trigger" onclick="closeGlassModal()">✕</button>
             <span class="kv-key" id="modalTargetKey" style="font-size: 0.8rem; letter-spacing: 0.05em;">Field Title</span>
-            <p class="modal-text" id="modalTargetValue">Full comprehensive text information dynamic target injection element slot.</p>
+            <p class="modal-text" id="modalTargetValue">Full context text slot filler configuration area.</p>
         </div>
     </div>
 
-    <!-- Interactive Logic State Script System Engine Controller -->
+    <!-- SPREADSHEET SYNC SYSTEM JAVASCRIPT CORNER ENGINE -->
     <script>
+// ====================================================================
+        // DATA SOURCE: local JSON file (edit data.json to update entries)
+        // ====================================================================
+        const DATA_FILE_URL = 'data.json';
+
         const registryData = { mavericks: [], catalysts: [], stars: [] };
         let activeTabCategory = 'mavericks';
         let focusedInducteeId = null;
         let activeCarouselSlideIndex = 0;
-
         const slideTitles = ["Profile", "HNG Experience", "HNG Relationships", "Moving on..."];
 
-        // Registry Generator System
-        function constructEcosystemRegistryFillers() {
-            // Fill 20 Mavericks
-            for (let i = 1; i <= 20; i++) {
-                registryData.mavericks.push({
-                    id: `mav-${i}`,
-                    name: i === 1 ? 'Chidubem Ojukwu' : `Maverick Marketer ${i}`,
-                    alias: i === 1 ? 'Man of the House' : `GrowthAgent_${i}`,
-                    linkedin: 'https://www.linkedin.com',
-                    portfolio: 'https://github.com/COTworks',
-                    rating: '⭐⭐⭐⭐⭐',
-                    experience: 'Testing out my marketing parameters in this intensive ecosystem was highly transformative and forced extreme mental focus adjustments.',
-                    differently: 'Prioritize automated macro-funnel systems early inside live data acquisition tracking phases immediately.',
-                    bestTask: 'Stage 2: German Tech Companies Research + Conflict Resolution workflows.',
-                    worstTask: 'Stage 3: Multi-Leg Travel Plan tracking spreadsheet configurations and layout parameters.',
-                    clients: 'All target sandbox enterprise owners were awesome individuals who pushed metrics tracking to extreme levels!',
-                    mentorsShout: 'Adaeze, Ahurika, BigTiffs, Pearl, The High Baba, Udi; thank you all so much for the exceptional guidance throughout this intense journey!',
-                    grateful: 'Adaeze, Airstar, BukolaO, FegoU, HephzibahM, JulietM, ShygirlA & Udi. Every single one of you made the tight sprints manageable.',
-                    clientShout: 'Qubzes kept it 100 from the beginning of our campaign metrics tracking across channels.',
-                    next: 'Stepping into highly dedicated product marketing tracking structures directly across active target firms.',
-                    back: 'Hell yeah!',
-                    advice: 'Enjoy the absolute thrill of metric optimization, remember to breathe, and keep it 100.'
-                });
-            }
-            // Fill 10 Catalysts
-            for (let i = 1; i <= 10; i++) {
-                registryData.catalysts.push({
-                    id: `cat-${i}`,
-                    name: `Catalyst Mentor ${i}`,
-                    alias: `LeadStrategist_${i}`,
-                    linkedin: 'https://www.linkedin.com',
-                    portfolio: 'https://hng.tech',
-                    rating: '⭐⭐⭐⭐⭐',
-                    experience: 'Guiding cohorts to locate retention vulnerabilities across multi-channel environments was challenging yet rewarding.',
-                    differently: 'Incorporate deep metric performance checks at earlier stage parameters to catch layout errors.',
-                    bestTask: 'Evaluating final deployment verification metrics and marketing profile maps.',
-                    worstTask: 'Parsing basic layout configurations that missed responsive scaling parameters entirely.',
-                    clients: 'Coordinating system performance matrices inside growing ecosystem platforms seamlessly.',
-                    mentorsShout: 'Outstanding structural focus shown by the entire track operation network across sprints.',
-                    grateful: 'The creative stamina and conversion metrics demonstrated by the finalists under pressure.',
-                    clientShout: 'Partners providing transparent sandbox environments for performance verification tests.',
-                    next: 'Formulating next-gen marketing data workflows for future tracks.',
-                    back: 'Without a doubt.',
-                    advice: 'Analyze live conversion drops instantly, use modern clean frames, and trust analytics.'
-                });
-            }
-            // Fill 15 Stars
-            for (let i = 1; i <= 15; i++) {
-                registryData.stars.push({
-                    id: `star-${i}`,
-                    name: `Rising Star ${i}`,
-                    alias: `ValiantMarketer_${i}`,
-                    linkedin: 'https://www.linkedin.com',
-                    portfolio: 'https://github.com',
-                    rating: '⭐⭐⭐⭐★',
-                    experience: 'A fast-paced journey reshaping my visual layout hierarchies and performance acquisition tracking schemas.',
-                    differently: 'Allocate buffer hours cleanly between asset creation workflows and deployment steps.',
-                    bestTask: 'Stage 4: Interactive micro-copy adjustments and early access generation frameworks.',
-                    worstTask: 'Stage 1: Processing unstructured raw client databases without mapping templates.',
-                    clients: 'Project track leads provided key instructions into real industry requirements.',
-                    mentorsShout: 'Appreciation to operational track leads for maintaining objective grading logic.',
-                    grateful: 'Unwavering backup from active tracking peers during high-stress sprint windows.',
-                    clientShout: 'Distribution channels that enabled real live tests directly across target audiences.',
-                    next: 'Developing conversion pipeline strategies while extending content layout skills.',
-                    back: 'Absolutely!',
-                    advice: 'Embrace clear analytical critique loops, keep layouts clean, and link up with peers.'
-                });
-            }
-        }
-
-        // Ambient Glass Modal Logic Controller Engines
+        // Ambient Glass Overlay System Controllers
         function openGlassModal(key, value) {
             document.getElementById('modalTargetKey').innerText = key;
             document.getElementById('modalTargetValue').innerText = value;
@@ -678,15 +623,14 @@
             }
         }
 
-        // Dynamic Text Truncation Checker to flag expandable rows safely
+        // Evaluate whether text is overflowing to activate hover styling rules cleanly
         function evaluateRowTruncationSafety(rowElement, textStr) {
-            // Check if string length safe threshold is broken to deploy hover micro-interactions
-            if (textStr.length > 55) {
+            if (textStr && textStr.length > 55) {
                 rowElement.classList.add('has-truncation');
             }
         }
 
-        // Carousel Slide Transition Action Controller
+        // Horizontal Carousel Position Slider Shift Engine 
         function shiftCarouselSlidePosition(direction) {
             if (direction === 'next' && activeCarouselSlideIndex < 3) activeCarouselSlideIndex++;
             if (direction === 'prev' && activeCarouselSlideIndex > 0) activeCarouselSlideIndex--;
@@ -698,7 +642,7 @@
             document.getElementById('nextArrow').disabled = activeCarouselSlideIndex === 3;
         }
 
-        // Individual Theater Injector Renderer Engine with Cinematic Cross-Fade
+        // Individual Component Render Showcase Theater Box 
         function refreshShowcaseTheaterProfileCard(itemId) {
             const showcaseBox = document.getElementById('showcaseBox');
             const targetPool = registryData[activeTabCategory];
@@ -706,32 +650,32 @@
 
             if (!profile) return;
 
-            // Trigger Cinematic Profile Transition Out Fading state
+            // Activate cinematic profile layer change phase out
             showcaseBox.classList.add('is-changing');
 
             setTimeout(() => {
                 showcaseBox.innerHTML = `
                     <div class="theater-layout">
                         <div class="theater-avatar-box">
-                            <img src="https://avatars.githubusercontent.com/u/placeholder?s=300" alt="${profile.name}'s image picture look">
+                            <img src="${profile.image || 'https://avatars.githubusercontent.com/u/placeholder?s=300'}" alt="${profile.name}">
                         </div>
                         <div class="carousel-view-panel">
                             <div class="slider-window">
                                 <div class="slider-track" id="sliderTrack" style="transform: translateX(-${activeCarouselSlideIndex * 25}%);">
                                     
-                                    <!-- Slide 1: Profile Block -->
+                                    <!-- Slide 1: Profile Module -->
                                     <div class="slide-pane">
                                         <h3>Profile</h3>
                                         <div class="kv-grid">
                                             <div class="kv-row" id="r-name"><span class="kv-key">Name</span><span class="kv-value">${profile.name}</span></div>
                                             <div class="kv-row" id="r-alias"><span class="kv-key">Alias</span><span class="kv-value">${profile.alias}</span></div>
-                                            <div class="kv-row"><span class="kv-key">LinkedIn</span><span class="kv-value"><a href="${profile.linkedin}" target="_blank" rel="noopener">www.linkedin.com</a></span></div>
-                                            <div class="kv-row"><span class="kv-key">Portfolio</span><span class="kv-value"><a href="${profile.portfolio}" target="_blank" rel="noopener">View Portfolio</a></span></div>
+                                            <div class="kv-row"><span class="kv-key">LinkedIn</span><span class="kv-value"><a href="${profile.linkedin}" target="_blank" rel="noopener">Open Profile</a></span></div>
+                                            <div class="kv-row"><span class="kv-key">Portfolio</span><span class="kv-value"><a href="${profile.portfolio}" target="_blank" rel="noopener">View Works</a></span></div>
                                             <div class="kv-row"><span class="kv-key">HNG i14 Rating</span><span class="kv-value">${profile.rating}</span></div>
                                         </div>
                                     </div>
 
-                                    <!-- Slide 2: HNG Experience -->
+                                    <!-- Slide 2: HNG Experience Module -->
                                     <div class="slide-pane">
                                         <h3>HNG Experience</h3>
                                         <div class="kv-grid">
@@ -742,7 +686,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Slide 3: HNG Relationships -->
+                                    <!-- Slide 3: HNG Relationships Module -->
                                     <div class="slide-pane">
                                         <h3>HNG Relationships</h3>
                                         <div class="kv-grid">
@@ -753,7 +697,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Slide 4: Moving On -->
+                                    <!-- Slide 4: Future parameters -->
                                     <div class="slide-pane">
                                         <h3>Moving on...</h3>
                                         <div class="kv-grid">
@@ -766,7 +710,7 @@
                                 </div>
                             </div>
 
-                            <!-- Horizontal Swipe Strip Navigation Controllers -->
+                            <!-- Swipe Strips Controls -->
                             <div class="carousel-footer-controls">
                                 <span class="active-slide-indicator" id="slideTitleText">${slideTitles[activeCarouselSlideIndex]}</span>
                                 <div class="arrow-action-cluster">
@@ -782,7 +726,7 @@
                     </div>
                 `;
 
-                // Run Truncation Evaluation mappings to safely hook up interactive classes
+                // Evaluate long strings strings loops for active truncation detection classes
                 evaluateRowTruncationSafety(document.getElementById('r-exp'), profile.experience);
                 evaluateRowTruncationSafety(document.getElementById('r-diff'), profile.differently);
                 evaluateRowTruncationSafety(document.getElementById('r-btask'), profile.bestTask);
@@ -794,17 +738,22 @@
                 evaluateRowTruncationSafety(document.getElementById('r-next'), profile.next);
                 evaluateRowTruncationSafety(document.getElementById('r-adv'), profile.advice);
 
-                // Lift changing block back up cleanly
+                // Lift changing module card view back to full opacity visibility
                 showcaseBox.classList.remove('is-changing');
             }, 150);
         }
 
-        // Build Navigation Grid Thumbnails Engine
+        // Build Navigation Grid Directory Tiles Architecture 
         function populateDirectoryTiles() {
             const tileGridArea = document.getElementById('tileGridArea');
             tileGridArea.innerHTML = '';
 
             const items = registryData[activeTabCategory];
+
+            if (items.length === 0) {
+                tileGridArea.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); font-size: 0.9rem; padding: 40px 0;">Awaiting live Google Sheet sync transmission rows...</div>`;
+                return;
+            }
 
             items.forEach(inductee => {
                 const tile = document.createElement('div');
@@ -815,7 +764,7 @@
 
                 tile.innerHTML = `
                     <div class="tile-photo-wrap">
-                        <img src="https://avatars.githubusercontent.com/u/placeholder?s=150" alt="${inductee.name} frame card look">
+                        <img src="${inductee.image || 'https://avatars.githubusercontent.com/u/placeholder?s=150'}" alt="${inductee.name}">
                     </div>
                     <div class="tile-name">${inductee.name}</div>
                     <div class="tile-alias">${inductee.alias}</div>
@@ -840,13 +789,13 @@
             });
         }
 
-        // Global Tab Switch Engine with Cinematic Cross-Fade + Slide Animations
+        // Global Tab Swapping System Engine accompanied by Hardware Accelerated Scaling
         function switchDirectoryTab(categoryKey) {
             const gridArea = document.getElementById('tileGridArea');
             activeTabCategory = categoryKey;
-            activeCarouselSlideIndex = 0; // Snap slide positioning state cleanly back to profile defaults
+            activeCarouselSlideIndex = 0; // Snap sliders position tracking state cleanly back to initial bounds on change
 
-            // Drop Opacity and Scale lower thumbnails layout
+            // Fade out the lower grids assembly
             gridArea.classList.add('is-changing');
 
             document.querySelectorAll('.filter-trigger').forEach(btn => {
@@ -858,28 +807,53 @@
             document.getElementById(`btn-${categoryKey}`).setAttribute('aria-selected', 'true');
 
             const newPool = registryData[categoryKey];
-            if (newPool.length > 0) focusedInducteeId = newPool[0].id;
+            focusedInducteeId = newPool.length > 0 ? newPool[0].id : null;
 
-            // Stagger actual content insertion slightly to give execution space for the CSS fade-out bounds
             setTimeout(() => {
                 populateDirectoryTiles();
-                refreshShowcaseTheaterProfileCard(focusedInducteeId);
-                
-                // Lift layout cleanly back into place
+                if (focusedInducteeId) {
+                    refreshShowcaseTheaterProfileCard(focusedInducteeId);
+                } else {
+                    document.getElementById('showcaseBox').innerHTML = `<div style="width:100%; text-align:center; color:var(--text-muted);">No profiles loaded inside this sector.</div>`;
+                }
+                // Lift layout views cleanly back to default visibility focus
                 gridArea.classList.remove('is-changing');
             }, 250);
         }
 
-        // Connect physical escape keystroke maps to open Modal layers
+        // NETWORK STREAM LIVE PROTOCOL SYSTEM INJECTOR 
+        async function fetchLiveSpreadsheetData() {
+            try {
+                // Pre-populate empty screen indicator spaces gracefully while connection initializes
+                document.getElementById('tileGridArea').innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); font-size: 0.9rem; padding: 40px 0;">Loading directory data...</div>`;
+
+                const response = await fetch(DATA_FILE_URL);
+                const data = await response.json();
+
+                // data.json is shaped as { mavericks: [...], catalysts: [...], stars: [...] }
+                // Each item already has an "id" and "category" is implied by its array.
+                registryData.mavericks = (data.mavericks || []).map(item => ({ ...item, category: 'mavericks' }));
+                registryData.catalysts = (data.catalysts || []).map(item => ({ ...item, category: 'catalysts' }));
+                registryData.stars = (data.stars || []).map(item => ({ ...item, category: 'stars' }));
+
+                // Set up landing profile view focuses safely
+                if (registryData.mavericks.length > 0) focusedInducteeId = registryData.mavericks[0].id;
+                populateDirectoryTiles();
+                refreshShowcaseTheaterProfileCard(focusedInducteeId);
+
+            } catch (error) {
+                console.error("Data-Sync disrupted: Unable to load data.json.", error);
+                document.getElementById('tileGridArea').innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #ff453a; font-size: 0.9rem; padding: 40px 0;">Could not load data.json. Make sure it's in the same folder as this page and the page is served over http/https (not opened directly as a file).</div>`;
+            }
+        }
+
+        // Attach escape physical keystroke triggers to close modal instantly
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeGlassModal();
         });
 
-        // Boot-Up
-        constructEcosystemRegistryFillers();
-        if (registryData.mavericks.length > 0) focusedInducteeId = registryData.mavericks[0].id;
-        populateDirectoryTiles();
-        refreshShowcaseTheaterProfileCard(focusedInducteeId);
+        // Run network execution tracks seamlessly on boot setup
+        fetchLiveSpreadsheetData();
     </script>
 </body>
 </html>
