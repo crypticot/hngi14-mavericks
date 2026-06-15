@@ -59,7 +59,7 @@
             overflow: hidden;
         }
 
-        .stars-layer-1, .stars-layer-2 {
+        .wanderers-layer-1, .wanderers-layer-2 {
             position: absolute;
             width: 200%;
             height: 200%;
@@ -73,11 +73,11 @@
             left: -50%;
         }
 
-        .stars-layer-1 {
+        .wanderers-layer-1 {
             animation: cosmicDrift 120s linear infinite;
         }
 
-        .stars-layer-2 {
+        .wanderers-layer-2 {
             animation: cosmicDrift 180s linear infinite reverse;
             opacity: 0.7;
         }
@@ -217,11 +217,14 @@
         .kv-row {
             display: flex;
             flex-direction: column;
+			width: 100%;
             border-bottom: 1px solid rgba(255,255,255,0.03);
             padding-bottom: 4px;
             padding-top: 4px;
             border-radius: 4px;
             transition: var(--transition-cinematic);
+			min-width: 0;
+			overflow: hidden;
         }
 
         .kv-row.has-truncation {
@@ -241,7 +244,8 @@
         }
 
         .kv-value {
-            font-size: 0.9rem;
+            display: block;
+			font-size: 0.9rem;
             color: var(--text-stark);
             font-weight: 400;
             margin-top: 1px;
@@ -551,8 +555,8 @@
 
     <!-- Space Engine Background Plane Layer -->
     <div class="space-canvas" aria-hidden="true">
-        <div class="stars-layer-1"></div>
-        <div class="stars-layer-2"></div>
+        <div class="wanderers-layer-1"></div>
+        <div class="wanderers-layer-2"></div>
     </div>
 
     <div class="wrapper">
@@ -568,11 +572,11 @@
 
         <!-- Directory Tab Switcher Filters Layout -->
         <div class="directory-controls">
-            <h2 class="section-label">Inductee Directory</h2>
+            <h2 class="section-label">The Lineup</h2>
             <div class="filter-cluster" role="tablist">
-                <button class="filter-trigger active" id="btn-mavericks" onclick="switchDirectoryTab('mavericks')" role="tab" aria-selected="true">Converters</button>
-                <button class="filter-trigger" id="btn-catalysts" onclick="switchDirectoryTab('catalysts')" role="tab" aria-selected="false">Windbearers</button>
-                <button class="filter-trigger" id="btn-stars" onclick="switchDirectoryTab('stars')" role="tab" aria-selected="false">Wanderers</button>
+                <button class="filter-trigger active" id="btn-converters" onclick="switchDirectoryTab('converters')" role="tab" aria-selected="true">Converters</button>
+                <button class="filter-trigger" id="btn-windbearers" onclick="switchDirectoryTab('windbearers')" role="tab" aria-selected="false">Windbearers</button>
+                <button class="filter-trigger" id="btn-wanderers" onclick="switchDirectoryTab('wanderers')" role="tab" aria-selected="false">Wanderers</button>
             </div>
         </div>
 
@@ -600,8 +604,8 @@
         // ====================================================================
         const DATA_FILE_URL = 'data.json';
 
-        const registryData = { mavericks: [], catalysts: [], stars: [] };
-        let activeTabCategory = 'mavericks';
+        const registryData = { converters: [], windbearers: [], wanderers: [] };
+        let activeTabCategory = 'converters';
         let focusedInducteeId = null;
         let activeCarouselSlideIndex = 0;
         const slideTitles = ["Profile", "HNG Experience", "HNG Relationships", "Moving on..."];
@@ -669,8 +673,8 @@
                                         <div class="kv-grid">
                                             <div class="kv-row" id="r-name"><span class="kv-key">Name</span><span class="kv-value">${profile.name}</span></div>
                                             <div class="kv-row" id="r-alias"><span class="kv-key">Alias</span><span class="kv-value">${profile.alias}</span></div>
-                                            <div class="kv-row"><span class="kv-key">LinkedIn</span><span class="kv-value"><a href="${profile.linkedin}" target="_blank" rel="noopener">Open Profile</a></span></div>
-                                            <div class="kv-row"><span class="kv-key">Portfolio</span><span class="kv-value"><a href="${profile.portfolio}" target="_blank" rel="noopener">View Works</a></span></div>
+                                            <div class="kv-row"><span class="kv-key">LinkedIn</span><span class="kv-value">${profile.linkedin ? `<a href="${profile.linkedin}" target="_blank" rel="noopener">Open Profile</a>` : 'Not provided'}</span></div>
+                                            <div class="kv-row"><span class="kv-key">Portfolio</span><span class="kv-value">${profile.portfolio ? `<a href="${profile.portfolio}" target="_blank" rel="noopener">View Works</a>` : 'Not provided'}</span></div>
                                             <div class="kv-row"><span class="kv-key">HNG i14 Rating</span><span class="kv-value">${profile.rating}</span></div>
                                         </div>
                                     </div>
@@ -690,10 +694,10 @@
                                     <div class="slide-pane">
                                         <h3>HNG Relationships</h3>
                                         <div class="kv-grid">
-                                            <div class="kv-row" id="r-client" onclick="openGlassModal('HNG Clients', \`${profile.clients}\`)"><span class="kv-key">HNG Clients</span><span class="kv-value">${profile.clients}</span></div>
+                                            <div class="kv-row" id="r-takeaway" onclick="openGlassModal('Key Takeaways', \`${profile.takeaway}\`)"><span class="kv-key">Key Takeaways</span><span class="kv-value">${profile.takeaway}</span></div>
                                             <div class="kv-row" id="r-mshout" onclick="openGlassModal('Mentors Shout-out', \`${profile.mentorsShout}\`)"><span class="kv-key">Mentors Shout-out</span><span class="kv-value">${profile.mentorsShout}</span></div>
                                             <div class="kv-row" id="r-grate" onclick="openGlassModal('I\\'m Grateful For', \`${profile.grateful}\`)"><span class="kv-key">I'm Grateful For</span><span class="kv-value">${profile.grateful}</span></div>
-                                            <div class="kv-row" id="r-cshout" onclick="openGlassModal('Client Shout-out', \`${profile.clientShout}\`)"><span class="kv-key">Client Shout-out</span><span class="kv-value">${profile.clientShout}</span></div>
+                                            <div class="kv-row" id="r-favprod" onclick="openGlassModal('Favourite Product', \`${profile.favProduct}\`)"><span class="kv-key">Favourite Product</span><span class="kv-value">${profile.favProduct}</span></div>
                                         </div>
                                     </div>
 
@@ -731,10 +735,10 @@
                 evaluateRowTruncationSafety(document.getElementById('r-diff'), profile.differently);
                 evaluateRowTruncationSafety(document.getElementById('r-btask'), profile.bestTask);
                 evaluateRowTruncationSafety(document.getElementById('r-wtask'), profile.worstTask);
-                evaluateRowTruncationSafety(document.getElementById('r-client'), profile.clients);
+                evaluateRowTruncationSafety(document.getElementById('r-takeaway'), profile.takeaway);
                 evaluateRowTruncationSafety(document.getElementById('r-mshout'), profile.mentorsShout);
                 evaluateRowTruncationSafety(document.getElementById('r-grate'), profile.grateful);
-                evaluateRowTruncationSafety(document.getElementById('r-cshout'), profile.clientShout);
+                evaluateRowTruncationSafety(document.getElementById('r-favprod'), profile.favProduct);
                 evaluateRowTruncationSafety(document.getElementById('r-next'), profile.next);
                 evaluateRowTruncationSafety(document.getElementById('r-adv'), profile.advice);
 
@@ -830,14 +834,14 @@
                 const response = await fetch(DATA_FILE_URL);
                 const data = await response.json();
 
-                // data.json is shaped as { mavericks: [...], catalysts: [...], stars: [...] }
+                // data.json is shaped as { converters: [...], windbearers: [...], wanderers: [...] }
                 // Each item already has an "id" and "category" is implied by its array.
-                registryData.mavericks = (data.mavericks || []).map(item => ({ ...item, category: 'mavericks' }));
-                registryData.catalysts = (data.catalysts || []).map(item => ({ ...item, category: 'catalysts' }));
-                registryData.stars = (data.stars || []).map(item => ({ ...item, category: 'stars' }));
+                registryData.converters = (data.converters || []).map(item => ({ ...item, category: 'converters' }));
+                registryData.windbearers = (data.windbearers || []).map(item => ({ ...item, category: 'windbearers' }));
+                registryData.wanderers = (data.wanderers || []).map(item => ({ ...item, category: 'wanderers' }));
 
                 // Set up landing profile view focuses safely
-                if (registryData.mavericks.length > 0) focusedInducteeId = registryData.mavericks[0].id;
+                if (registryData.converters.length > 0) focusedInducteeId = registryData.converters[0].id;
                 populateDirectoryTiles();
                 refreshShowcaseTheaterProfileCard(focusedInducteeId);
 
