@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG i14 Marketing Mavericks — Hall of Fame</title>
+    <title>HNG i14 Marketing Mavericks: Hall of Fame</title>
     <!-- Fonts Integration -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,6 +86,38 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+		
+		/* Shooting Stars */
+		.shooting-star {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 2px;
+			height: 2px;
+			background: #fff;
+			border-radius: 50%;
+			pointer-events: none;
+			z-index: 0;
+			opacity: 0;
+		}
+
+		.shooting-star::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			right: 0;
+			transform: translateY(-50%);
+			width: 80px;
+			height: 1px;
+			background: linear-gradient(to left, rgba(255,255,255,0.8), transparent);
+		}
+
+		@keyframes shootingStar {
+			0%   { opacity: 0; transform: translate(0, 0) rotate(var(--angle)); }
+			5%   { opacity: 1; }
+			90%  { opacity: 1; }
+			100% { opacity: 0; transform: translate(var(--travel-x), var(--travel-y)) rotate(var(--angle)); }
+		}
 
         /* Layout Structure Grid Parameters */
         .wrapper {
@@ -123,7 +155,7 @@
 
         /* Restricted Height Showcase Theater Card Panel */
         .showcase-theater {
-            background: radial-gradient(circle at top left, var(--spotlight-glow), transparent 50%), var(--bg-glass);
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.02), transparent 50%), rgba(10, 10, 12, 0.45);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-glass);
@@ -218,13 +250,13 @@
             display: flex;
             flex-direction: column;
 			width: 100%;
+            min-width: 0;
+            overflow: hidden;
             border-bottom: 1px solid rgba(255,255,255,0.03);
             padding-bottom: 4px;
             padding-top: 4px;
             border-radius: 4px;
             transition: var(--transition-cinematic);
-			min-width: 0;
-			overflow: hidden;
         }
 
         .kv-row.has-truncation {
@@ -374,7 +406,7 @@
         }
 
         .inductee-tile {
-            background: var(--bg-surface);
+            background: rgba(17, 17, 19, 0.5);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-inner);
             padding: 10px;
@@ -457,17 +489,20 @@
         }
 
         .modal-card {
-            background: linear-gradient(135deg, #16161a 0%, #0d0d0f 100%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: var(--radius-main);
-            padding: 32px;
-            max-width: 520px;
-            width: 90%;
-            position: relative;
-            transform: translateY(20px) scale(0.98);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
-            transition: var(--transition-smooth);
-        }
+			background: linear-gradient(135deg, #16161a 0%, #0d0d0f 100%);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: var(--radius-main);
+			padding: 32px;
+			max-width: 520px;
+			width: 90%;
+			max-height: 75vh;
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			transform: translateY(20px) scale(0.98);
+			box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+			transition: var(--transition-smooth);
+		}
 
         .modal-overlay.active .modal-card {
             transform: translateY(0) scale(1);
@@ -494,10 +529,13 @@
         }
 
         .modal-text {
-            font-size: 1.05rem;
-            line-height: 1.5;
-            color: var(--text-stark);
-            margin-top: 8px;
+			font-size: 1.05rem;
+			line-height: 1.5;
+			color: var(--text-stark);
+			margin-top: 8px;
+			overflow-y: auto;
+			flex: 1;
+			padding-right: 4px;
         }
 
         /* Footer parameters */
@@ -557,6 +595,7 @@
     <div class="space-canvas" aria-hidden="true">
         <div class="wanderers-layer-1"></div>
         <div class="wanderers-layer-2"></div>
+		<div id="shootingStarContainer"></div>
     </div>
 
     <div class="wrapper">
@@ -824,6 +863,35 @@
                 gridArea.classList.remove('is-changing');
             }, 250);
         }
+
+		function spawnShootingStar() {
+			const star = document.createElement('div');
+			star.className = 'shooting-star';
+			const startX = Math.random() * window.innerWidth;
+			const startY = Math.random() * window.innerHeight * 0.5;
+			const angle = 20 + Math.random() * 30;
+			const distance = 200 + Math.random() * 300;
+			const travelX = Math.cos((angle * Math.PI) / 180) * distance;
+			const travelY = Math.sin((angle * Math.PI) / 180) * distance;
+			const duration = 1000 + Math.random() * 1500;
+			star.style.cssText = `
+				left: ${startX}px;
+				top: ${startY}px;
+				--angle: ${angle}deg;
+				--travel-x: ${travelX}px;
+				--travel-y: ${travelY}px;
+				animation: shootingStar ${duration}ms ease-out forwards;
+			`;
+			document.getElementById('shootingStarContainer').appendChild(star);
+			setTimeout(() => star.remove(), duration + 100);
+		}
+
+		// Spawn a shooting star every 4–9 seconds randomly
+		function scheduleShootingStar() {
+			spawnShootingStar();
+			setTimeout(scheduleShootingStar, 4000 + Math.random() * 5000);
+		}
+		scheduleShootingStar();
 
         // NETWORK STREAM LIVE PROTOCOL SYSTEM INJECTOR 
         async function fetchLiveSpreadsheetData() {
