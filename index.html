@@ -815,6 +815,7 @@
 
                 const executeSelection = () => {
                     focusedInducteeId = inductee.id;
+					activeCarouselSlideIndex = 0;
                     document.querySelectorAll('.inductee-tile').forEach(t => t.classList.remove('selected'));
                     tile.classList.add('selected');
                     refreshShowcaseTheaterProfileCard(inductee.id);
