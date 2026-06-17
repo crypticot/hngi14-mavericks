@@ -457,7 +457,7 @@
             text-overflow: ellipsis;
         }
 
-        .tile-alias {
+        .tile-slackid {
             font-size: 0.75rem;
             color: var(--text-muted);
             white-space: nowrap;
@@ -810,7 +810,7 @@
                         <img src="${inductee.image || 'https://avatars.githubusercontent.com/u/placeholder?s=150'}" alt="${inductee.name}">
                     </div>
                     <div class="tile-name">${inductee.name}</div>
-                    <div class="tile-alias">${inductee.slackid}</div>
+                    <div class="tile-slackid">${inductee.slackid}</div>
                 `;
 
                 const executeSelection = () => {
